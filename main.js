@@ -236,7 +236,7 @@ class Shot {
         stopGame = true; // stop shooting
         arr = [] // Reset all movement
         clearInterval(timerInterval)
-        alert("Vous avez tenu " + timer + " secondes et " + scorePoint + " points" )
+        alert("Vous avez obtenu un score de : " + (timer + scorePoint) + "\nPS: Temps : " + timer + " Points : " + scorePoint )
         window.location.reload()
       }
     }, 1);
