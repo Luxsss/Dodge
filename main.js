@@ -5,6 +5,7 @@ let posY = parseInt(computedStyle.top);
 let posX = parseInt(computedStyle.left);
 let stopGame = false;
 let speedShot = 500;
+let speedFroze = false;
 
 // Add of the text Timer
 let timerText = document.createElement("p");
@@ -243,20 +244,42 @@ class Shot {
   }
 }
 
-
-
 setTimeout(() => {
   start(speedShot)
 }, 3000);
 
 function start(vitesse){
+  if(!stopGame && vitesse === 70){
+    speedFroze = true
+
+    setTimeout(() => {
+      speedFroze = false
+    }, 5000);
+  }
+  if(!stopGame && vitesse === 80){
+    speedFroze = true
+
+    setTimeout(() => {
+      speedFroze = false
+    }, 5000);
+  }
+  if(!stopGame && vitesse === 100){
+    speedFroze = true
+
+    setTimeout(() => {
+      speedFroze = false
+    }, 5000);
+  }
+
   setTimeout(() => {
     if (!stopGame) {
       new Shot();
-      if (speedShot > 60) {
+      if (speedShot > 65 && !speedFroze) {
         speedShot -= 5;
+        console.log(speedShot)
         start(speedShot)
       }else{
+        console.log(speedShot)
         start(speedShot)
       }
     }
