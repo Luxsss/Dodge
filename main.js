@@ -283,36 +283,13 @@ setTimeout(() => {
   start(speedShot)
 }, 3000);
 
+
 function start(vitesse){
-  if(!stopGame && vitesse === 70){
+  if(!stopGame && vitesse >= 70 && vitesse <= 110){
     speedFroze = true
     setTimeout(() => {
       speedFroze = false
-    }, 5000);
-  }
-  if(!stopGame && vitesse === 80){
-    speedFroze = true
-    setTimeout(() => {
-      speedFroze = false
-    }, 5000);
-  }
-  if(!stopGame && vitesse === 90){
-    speedFroze = true
-    setTimeout(() => {
-      speedFroze = false
-    }, 5000);
-  }
-  if(!stopGame && vitesse === 100){
-    speedFroze = true
-    setTimeout(() => {
-      speedFroze = false
-    }, 5000);
-  }
-  if(!stopGame && vitesse === 110){
-    speedFroze = true
-    setTimeout(() => {
-      speedFroze = false
-    }, 5000);
+    }, 3000);
   }
 
   setTimeout(() => {
