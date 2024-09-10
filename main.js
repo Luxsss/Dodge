@@ -285,7 +285,7 @@ setTimeout(() => {
 
 
 function start(vitesse){
-  if(!stopGame && vitesse >= 70 && vitesse <= 110){
+  if(!stopGame && vitesse >= 75 && vitesse <= 110){
     speedFroze = true
     setTimeout(() => {
       speedFroze = false
@@ -295,7 +295,7 @@ function start(vitesse){
   setTimeout(() => {
     if (!stopGame) {
       new Shot();
-      if (speedShot > 65 && !speedFroze) {
+      if (speedShot > 70 && !speedFroze) {
         speedShot -= 5;
         console.log(speedShot)
         start(speedShot)
