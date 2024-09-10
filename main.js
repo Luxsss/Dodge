@@ -4,9 +4,26 @@ let computedStyle = getComputedStyle(dot);
 let posY = parseInt(computedStyle.top);
 let posX = parseInt(computedStyle.left);
 let stopGame = false;
+let speedShot = 500;
 
+// Add of the text Timer
+let timerText = document.createElement("p");
+timerText.classList.add("timer")
+timerText.innerHTML = 3
+
+// Change number of time before the game start
+let inter1 = setInterval(() => {
+    setTimeout(() => {
+      clearInterval(inter1)
+      document.body.removeChild(timerText);
+    }, 2000);
+    timerText.innerHTML -= 1
+}, 1000);
+
+document.body.appendChild(timerText);
+
+// Timer of how long the user survive
 let timer = 0;
-
 let timerInterval = setInterval(() => {
   timer += 1;
 }, 1000);
@@ -164,8 +181,9 @@ class Shot {
       }
       if(this.checkCollision(dot, this.shot)) {
         dot.style.backgroundColor = "yellow"
-        // this.removeAllShots();
-        stopGame = true;
+        this.removeAllShots();
+        stopGame = true; // stop shooting
+        arr = [] // Reset all movement
         clearInterval(timerInterval)
         alert("Vous avez tenu " + timer + " secondes")
       }
@@ -198,12 +216,22 @@ class Shot {
 }
 
 
+
 setTimeout(() => {
-  setInterval(() => {
-    if (!stopGame) {
-      new Shot();
-    }
-  }, 100);
+  start(speedShot)
 }, 3000);
 
-// new Shot()
+function start(vitesse){
+  setTimeout(() => {
+    if (!stopGame) {
+      new Shot();
+      if (speedShot > 60) {
+        speedShot -= 5;
+        console.log(speedShot)
+        start(speedShot)
+      }else{
+        start(speedShot)
+      }
+    }
+  }, vitesse);
+}
