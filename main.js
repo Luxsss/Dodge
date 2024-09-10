@@ -93,9 +93,36 @@ class Shot {
   constructor(){
     this.shot = document.createElement("div")
     document.body.appendChild(this.shot)
+    this.randomColor()
+    this.randomSpeed()
     this.random()
     this.computedStyleShot = getComputedStyle(this.shot);
     this.moveShot()
+  }
+
+  randomColor(){
+    let arrColors = ["red", "orange", "green", "blue" ]
+    let result = Math.floor(Math.random () * 4)
+    this.colorShot = arrColors[result];
+    this.shot.style.backgroundColor = this.colorShot
+  }
+
+  randomSpeed(){
+    switch (this.colorShot) {
+      case "orange":
+        this.bulletSpeed = 1.5
+        break;
+      case "green":
+        this.bulletSpeed = 2
+        break;
+      case "blue":
+        this.bulletSpeed = 2.5
+        break;
+
+      default:
+        this.bulletSpeed = 1
+        break;
+    }
   }
 
   random(){
@@ -146,7 +173,7 @@ class Shot {
 
       switch (this.direction) {
         case "up":
-          this.posY += 1.5;
+          this.posY += this.bulletSpeed;
           this.shot.style.top = this.posY + "px"
           if(this.posY > window.innerHeight - 40){
             clearInterval(interval)
@@ -155,7 +182,7 @@ class Shot {
           }
         break;
         case "left":
-          this.posX += 1.5;
+          this.posX += this.bulletSpeed;
           this.shot.style.left = this.posX + "px"
           if(this.posX > window.innerWidth - 40){
             clearInterval(interval)
@@ -163,7 +190,7 @@ class Shot {
           }
         break;
         case "right":
-          this.posX -= 1.5;
+          this.posX -= this.bulletSpeed;
           this.shot.style.left = this.posX + "px"
           if(this.posX < 0){
             clearInterval(interval)
@@ -171,7 +198,7 @@ class Shot {
           }
         break;
         default:
-          this.posY -= 1.5;
+          this.posY -= this.bulletSpeed;
           this.shot.style.top = this.posY + "px"
           if(this.posY < 0){
             clearInterval(interval)
@@ -180,7 +207,7 @@ class Shot {
         break;
       }
       if(this.checkCollision(dot, this.shot)) {
-        dot.style.backgroundColor = "yellow"
+        dot.style.backgroundColor = "black"
         this.removeAllShots();
         stopGame = true; // stop shooting
         arr = [] // Reset all movement
