@@ -121,7 +121,7 @@ class Shot {
   }
 
   randomColor(){
-    let arrColors = ["red", "orange", "green", "blue" ]
+    let arrColors = ["#e41313", "#d8bf1f", "#31c42b", "#3295c7" ]
     let result = Math.floor(Math.random () * 4)
     this.colorShot = arrColors[result];
     this.shot.style.backgroundColor = this.colorShot
@@ -129,13 +129,13 @@ class Shot {
 
   randomSpeed(){
     switch (this.colorShot) {
-      case "orange":
+      case "#d8bf1f":
         this.bulletSpeed = 1.5
         break;
-      case "green":
+      case "#31c42b":
         this.bulletSpeed = 2
         break;
-      case "blue":
+      case "#3295c7":
         this.bulletSpeed = 2.5
         break;
 
