@@ -6,6 +6,7 @@ let posX = parseInt(computedStyle.left);
 let stopGame = false;
 let speedShot = 500;
 let speedFroze = false;
+let scorePoint = 0;
 
 // Add of the text Timer
 let timerText = document.createElement("p");
@@ -28,6 +29,24 @@ let timer = 0;
 let timerInterval = setInterval(() => {
   timer += 1;
 }, 1000);
+
+// Add points
+
+let point = document.createElement("div")
+point.classList.add("point")
+
+
+function createPoint(){
+  let posYRandom = Math.floor(Math.random() * (window.innerHeight - 5))
+  let posXRandom = Math.floor(Math.random() * (window.innerHeight - 5))
+
+  point.style.top = posYRandom + "px";
+  point.style.left = posXRandom + "px";
+
+  document.body.appendChild(point)
+}
+
+createPoint()
 
 dot.addEventListener("click", () => {
   let randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -207,13 +226,17 @@ class Shot {
           }
         break;
       }
+      if(this.checkCollisionPoint(dot, point)) {
+        createPoint()
+        scorePoint += 1;
+      }
       if(this.checkCollision(dot, this.shot)) {
         dot.style.backgroundColor = "black"
         this.removeAllShots();
         stopGame = true; // stop shooting
         arr = [] // Reset all movement
         clearInterval(timerInterval)
-        alert("Vous avez tenu " + timer + " secondes")
+        alert("Vous avez tenu " + timer + " secondes et " + scorePoint + " points" )
         window.location.reload()
       }
     }, 1);
@@ -228,6 +251,18 @@ class Shot {
       boxDot.bottom < boxShot.top ||
       boxDot.left > boxShot.right ||
       boxDot.right < boxShot.left
+    );
+  }
+
+  checkCollisionPoint(dot, point) {
+    const boxDot = dot.getBoundingClientRect();
+    const boxPoint = point.getBoundingClientRect();
+
+    return !(
+      boxDot.top > boxPoint.bottom ||
+      boxDot.bottom < boxPoint.top ||
+      boxDot.left > boxPoint.right ||
+      boxDot.right < boxPoint.left
     );
   }
 
