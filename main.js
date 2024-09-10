@@ -213,6 +213,7 @@ class Shot {
         arr = [] // Reset all movement
         clearInterval(timerInterval)
         alert("Vous avez tenu " + timer + " secondes")
+        window.location.reload()
       }
     }, 1);
   }
@@ -254,7 +255,6 @@ function start(vitesse){
       new Shot();
       if (speedShot > 60) {
         speedShot -= 5;
-        console.log(speedShot)
         start(speedShot)
       }else{
         start(speedShot)
