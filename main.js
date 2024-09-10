@@ -55,10 +55,10 @@ dot.addEventListener("click", () => {
 
 document.addEventListener("keydown", (e) => {
   if (!arr.includes(e.key)) {
-    if(e.key === "ArrowUp") up()
-    if(e.key === "ArrowLeft") left()
-    if(e.key === "ArrowRight") right()
-    if(e.key === "ArrowDown") down()
+    if(e.key === "ArrowUp" || e.key === "z" ) up()
+    if(e.key === "ArrowLeft" || e.key === "q") left()
+    if(e.key === "ArrowRight" || e.key === "d") right()
+    if(e.key === "ArrowDown" || e.key === "s") down()
     arr.push(e.key)
   }
 });
@@ -73,7 +73,7 @@ function up(){
     dot.style.top = posY + "px";
   }
   setTimeout(() => {
-    if(arr.includes('ArrowUp')) up()
+    if(arr.includes('ArrowUp') || arr.includes("z")) up()
   }, 10);
 }
 
@@ -83,7 +83,7 @@ function left(){
     dot.style.left = posX + "px";
   }
   setTimeout(() => {
-    if(arr.includes('ArrowLeft')) left()
+    if(arr.includes('ArrowLeft') || arr.includes("q") ) left()
   }, 10);
 }
 
@@ -94,7 +94,7 @@ function right(){
     dot.style.left = posX + "px";
   }
   setTimeout(() => {
-    if(arr.includes('ArrowRight')) right()
+    if(arr.includes('ArrowRight') || arr.includes("d") ) right()
   }, 10);
 }
 
@@ -105,7 +105,7 @@ function down(){
     dot.style.top = posY + "px";
   }
   setTimeout(() => {
-    if(arr.includes('ArrowDown')) down()
+    if(arr.includes('ArrowDown') || arr.includes("s") ) down()
   }, 10);
 }
 
