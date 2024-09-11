@@ -69,7 +69,7 @@ document.addEventListener("keyup", (e) => {
 
 function up(){
   if (posY > 0) {
-    posY -= 2;
+    posY -= 2.5;
     dot.style.top = posY + "px";
   }
   setTimeout(() => {
@@ -79,7 +79,7 @@ function up(){
 
 function left(){
   if(posX > 0){
-    posX -= 2;
+    posX -= 2.5;
     dot.style.left = posX + "px";
   }
   setTimeout(() => {
@@ -90,7 +90,7 @@ function left(){
 function right(){
   let maxX = window.innerWidth - dot.offsetWidth;
   if (posX < maxX) {
-    posX += 2;
+    posX += 2.5;
     dot.style.left = posX + "px";
   }
   setTimeout(() => {
@@ -101,7 +101,7 @@ function right(){
 function down(){
   let maxY = window.innerHeight - dot.offsetHeight;
   if (posY < maxY) {
-    posY += 2;
+    posY += 2.5;
     dot.style.top = posY + "px";
   }
   setTimeout(() => {
