@@ -25,7 +25,7 @@ let inter1 = setInterval(() => {
 document.body.appendChild(timerText);
 
 // Timer of how long the user survive
-let timer = 0;
+let timer = -3;
 let timerInterval = setInterval(() => {
   timer += 1;
 }, 1000);
@@ -108,6 +108,19 @@ function down(){
     if(arr.includes('ArrowDown') || arr.includes("s") ) down()
   }, 10);
 }
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    document.getElementById("title").innerHTML = "Hidden"
+    clearInterval(timerInterval)
+
+  }else{
+    document.getElementById("title").innerHTML = "Visible"
+    timerInterval = setInterval(() => {
+      timer += 1;
+    }, 1000);
+  }
+})
 
 class Shot {
   constructor(){
