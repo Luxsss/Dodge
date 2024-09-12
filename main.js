@@ -8,6 +8,7 @@ let speedShot = 500;
 let speedFroze = false;
 let scorePoint = 0;
 let timerInterval = null
+let pausedGame = false;
 
 // Add of the text Timer
 let timerText = document.createElement("p");
@@ -52,12 +53,14 @@ dot.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (!arr.includes(e.key)) {
-    if(e.key === "ArrowUp" || e.key === "z" ) up()
-    if(e.key === "ArrowLeft" || e.key === "q") left()
-    if(e.key === "ArrowRight" || e.key === "d") right()
-    if(e.key === "ArrowDown" || e.key === "s") down()
-    arr.push(e.key)
+  if (!stopGame) {
+    if (!arr.includes(e.key)) {
+      if(e.key === "ArrowUp" || e.key === "z" ) up()
+      if(e.key === "ArrowLeft" || e.key === "q") left()
+      if(e.key === "ArrowRight" || e.key === "d") right()
+      if(e.key === "ArrowDown" || e.key === "s") down()
+      arr.push(e.key)
+    }
   }
 });
 
@@ -109,14 +112,36 @@ function down(){
 
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
-    document.getElementById("title").innerHTML = "Hidden"
     clearInterval(timerInterval)
-
+    arr = []
+    stopGame = true;
+    pausedGame = true
   }else{
-    document.getElementById("title").innerHTML = "Visible"
-    timerInterval = setInterval(() => {
-      timer += 1;
-    }, 1000);
+    if(!pausedGame){
+      stopGame = false;
+      start(speedShot)
+      timerInterval = setInterval(() => {
+        timer += 1;
+      }, 1000);
+    }
+  }
+})
+
+document.addEventListener("keydown", (e) => {
+  if (e.key == "Escape") {
+    if (!stopGame) {
+      pausedGame = true;
+      clearInterval(timerInterval)
+      stopGame = true;
+      arr = []
+    }else{
+      pausedGame = false;
+      stopGame = false;
+      start(speedShot)
+      timerInterval = setInterval(() => {
+        timer += 1;
+      }, 1000);
+    }
   }
 })
 
@@ -197,10 +222,11 @@ class Shot {
 
   moveShot(){
     const interval = setInterval(() => {
-      if (stopGame) {
-        clearInterval(interval);
-        return;
-      }
+      // if (stopGame) {
+      //   clearInterval(interval);
+      //   return;
+      // }
+      if(stopGame)return
 
       switch (this.direction) {
         case "up":
@@ -209,7 +235,6 @@ class Shot {
           if(this.posY > window.innerHeight - 40){
             clearInterval(interval)
             document.body.removeChild(this.shot);
-
           }
         break;
         case "left":
