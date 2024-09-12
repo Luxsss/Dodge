@@ -297,10 +297,8 @@ function start(vitesse){
       new Shot();
       if (speedShot > 70 && !speedFroze) {
         speedShot -= 5;
-        console.log(speedShot)
         start(speedShot)
       }else{
-        console.log(speedShot)
         start(speedShot)
       }
     }
