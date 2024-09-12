@@ -116,6 +116,7 @@ document.addEventListener("visibilitychange", () => {
     arr = []
     stopGame = true;
     pausedGame = true
+    addPausedText()
   }else{
     if(!pausedGame){
       stopGame = false;
@@ -134,6 +135,7 @@ document.addEventListener("keydown", (e) => {
       clearInterval(timerInterval)
       stopGame = true;
       arr = []
+      addPausedText()
     }else{
       pausedGame = false;
       stopGame = false;
@@ -141,9 +143,22 @@ document.addEventListener("keydown", (e) => {
       timerInterval = setInterval(() => {
         timer += 1;
       }, 1000);
+      removePausedText()
     }
   }
 })
+
+function addPausedText(){
+  let textPause = document.createElement("p")
+  textPause.classList.add("paused")
+  textPause.innerHTML = "PAUSE"
+  document.body.appendChild(textPause)
+}
+
+function removePausedText(){
+  let okok = document.body.getElementsByClassName("paused")[0]
+  document.body.removeChild(okok);
+}
 
 class Shot {
   constructor(){
