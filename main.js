@@ -331,10 +331,12 @@ class Shot {
 }
 
 setTimeout(() => {
-  start(speedShot)
-  timerInterval = setInterval(() => {
-    timer += 1;
-  }, 1000);
+  if (!pausedGame) {
+    start(speedShot)
+    timerInterval = setInterval(() => {
+      timer += 1;
+    }, 1000);
+  }
 }, 3000);
 
 
