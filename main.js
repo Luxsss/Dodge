@@ -7,6 +7,7 @@ let stopGame = false;
 let speedShot = 500;
 let speedFroze = false;
 let scorePoint = 0;
+let timerInterval = null
 
 // Add of the text Timer
 let timerText = document.createElement("p");
@@ -25,10 +26,7 @@ let inter1 = setInterval(() => {
 document.body.appendChild(timerText);
 
 // Timer of how long the user survive
-let timer = -3;
-let timerInterval = setInterval(() => {
-  timer += 1;
-}, 1000);
+let timer = 0;
 
 // Add points
 
@@ -294,6 +292,9 @@ class Shot {
 
 setTimeout(() => {
   start(speedShot)
+  timerInterval = setInterval(() => {
+    timer += 1;
+  }, 1000);
 }, 3000);
 
 
